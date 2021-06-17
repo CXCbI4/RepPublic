@@ -32,7 +32,19 @@ namespace WpfApp1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (_currentHouse.ID == 0)
+                Database1Entities.GetContext().House.Add(_currentHouse);
 
+            try
+            {
+                Database1Entities.GetContext().SaveChanges();
+                MessageBox.Show("Информация сохранена!");
+                Class1.MainFrame.GoBack();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }
